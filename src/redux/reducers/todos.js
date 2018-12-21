@@ -17,6 +17,7 @@ export const todos = (state = initialState, action) => {
     case C.CHANGE_TODO:
       return state.map((item) => {
         if (item.id === action.id) {
+          console.log(item.id, 'id');
           return {
             id: action.id,
             title: action.title,

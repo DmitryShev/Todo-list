@@ -1,5 +1,5 @@
 export const Options = [
-  'Low', 'Middle', 'Hight'
+  'None', 'Low', 'Middle', 'Hight'
 ];
 
 export const State = {

@@ -38,6 +38,7 @@ export class Input extends Component {
     // console.log(this.state);
     const yesterday = Datetime.moment().subtract(1, 'hour');
     const valid = current => current.isAfter(yesterday);
+    const maxLength = 50;
     return (
       <div>
         <form onSubmit={(e) => {
@@ -46,12 +47,19 @@ export class Input extends Component {
           dispatch(addTodo(title, priority, state, deadline));
         }}
         >
-          <input onChange={this.titleHandle} value={title} type="text" />
+          <input
+            onChange={this.titleHandle}
+            value={title}
+            type="text"
+            maxLength={maxLength}
+            required
+          />
           <select onChange={this.selectHandle} value={priority}>
             {Options.map(item => <option value={item} key={item}>{item}</option>)}
           </select>
           <span>
             <Datetime
+              defaultValue={false}
               onChange={this.deadlineHandle}
               isValidDate={valid}
               input={false}

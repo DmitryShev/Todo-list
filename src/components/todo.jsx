@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, func, number } from 'prop-types';
+import { string, func } from 'prop-types';
 import styled from 'styled-components';
 
 import { TodoForm } from './elements/todoForm';
