@@ -14,11 +14,11 @@ export const todos = (state = initialState, action) => {
           deadline: action.deadline
         }
       ];
-    case C.CHANGE_TODO:
+    case C.EDIT_TODO:
       return state.map((item) => {
         if (item.id === action.id) {
-          console.log(item.id, 'id');
           return {
+            // ...item,
             id: action.id,
             title: action.title,
             priority: action.priority,
@@ -26,7 +26,7 @@ export const todos = (state = initialState, action) => {
             deadline: action.deadline
           };
         }
-        return state;
+        return item;
       });
     case C.DELETE_TODO:
       return state.filter(item => item.id !== action.id);

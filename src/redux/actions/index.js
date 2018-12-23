@@ -13,8 +13,8 @@ export const addTodo = (title, priority, state, deadline) => ({
   deadline
 });
 
-export const changeTodo = (id, title, priority, state, deadline) => ({
-  type: C.CHANGE_TODO,
+export const editTodo = (id, title, priority, state, deadline) => ({
+  type: C.EDIT_TODO,
   id,
   title,
   priority,

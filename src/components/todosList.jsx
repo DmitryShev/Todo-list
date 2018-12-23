@@ -15,7 +15,7 @@ import { Todo } from './todo';
 
 export class TodosList extends React.PureComponent {
   render() {
-    const { todos, deleteTodo, changeTodo } = this.props;
+    const { todos, deleteTodo, editTodo } = this.props;
     return (
       <ul>
         {todos.map(item => (
@@ -27,7 +27,7 @@ export class TodosList extends React.PureComponent {
             id={item.id}
             key={item.id}
             deleteTodo={deleteTodo}
-            changeTodo={changeTodo}
+            editTodo={editTodo}
           />))}
       </ul>);
   }

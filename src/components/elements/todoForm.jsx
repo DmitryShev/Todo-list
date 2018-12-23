@@ -6,7 +6,7 @@ import { Options } from '../../containers/helpers';
 
 export class TodoForm extends Component {
   static propTypes = {
-    changeTodo: func.isRequired,
+    editTodo: func.isRequired,
     id: string.isRequired
   };
 
@@ -24,7 +24,7 @@ export class TodoForm extends Component {
   deadlineHandle = moment => this.setState({ deadline: moment.format('HH:mm DD.MM.YYYY') })
 
   render() {
-    const { changeTodo, id } = this.props;
+    const { editTodo, id } = this.props;
     const {
       title,
       priority,
@@ -38,7 +38,7 @@ export class TodoForm extends Component {
       <form onSubmit={(e) => {
         e.preventDefault();
         if (!title) { return; }
-        changeTodo(id, title, priority, state, deadline);
+        editTodo(id, title, priority, state, deadline);
       }}
       >
         <input onChange={this.titleHandle} maxLength={maxLength} required />

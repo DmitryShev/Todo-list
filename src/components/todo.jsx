@@ -79,7 +79,7 @@ export class Todo extends Component {
     deadline: string.isRequired,
     id: string.isRequired,
     deleteTodo: func.isRequired,
-    changeTodo: func.isRequired
+    editTodo: func.isRequired
   }
 
   state = {
@@ -104,7 +104,7 @@ export class Todo extends Component {
       state,
       deadline,
       deleteTodo,
-      changeTodo,
+      editTodo,
       id
     } = this.props;
     const { isOpen, isEdit } = this.state;
@@ -125,7 +125,7 @@ export class Todo extends Component {
               {isEdit && (
                 <TodoForm
                   id={id}
-                  changeTodo={changeTodo}
+                  editTodo={editTodo}
                   title={title}
                   priority={priority}
                   state={state}
