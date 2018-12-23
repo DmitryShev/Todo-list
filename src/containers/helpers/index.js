@@ -2,7 +2,6 @@ export const Options = [
   'None', 'Low', 'Middle', 'Hight'
 ];
 
-export const State = {
-  active: 'Active',
-  closed: 'Closed'
-};
+
+// maximum length of user input
+export const InputMaxLength = 50;

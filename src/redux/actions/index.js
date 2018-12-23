@@ -22,6 +22,11 @@ export const editTodo = (id, title, priority, state, deadline) => ({
   deadline
 });
 
+export const completeTodo = id => ({
+  type: C.COMPLETE_TODO,
+  id,
+});
+
 export const deleteTodo = id => ({
   type: C.DELETE_TODO,
   id

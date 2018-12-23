@@ -1,38 +1,35 @@
 import React from 'react';
-// import { objectOf, arrayOf, array } from 'prop-types';
+import { func, arrayOf, object } from 'prop-types';
 
 import { Todo } from './todo';
 
 
-/* export const TodosList = ({ todos }) => (
+export const TodosList = ({
+  todos,
+  deleteTodo,
+  editTodo,
+  completeTodo
+}) => (
   <ul>
-    {
-      todos.map(item => <Todo text={item.text} key={item.id} />)
-    }
+    {todos.map(item => (
+      <Todo
+        title={item.title}
+        priority={item.priority}
+        state={item.state}
+        deadline={item.deadline}
+        id={item.id}
+        key={item.id}
+        deleteTodo={deleteTodo}
+        editTodo={editTodo}
+        completeTodo={completeTodo}
+      />))}
   </ul>
 );
-*/
 
-export class TodosList extends React.PureComponent {
-  render() {
-    const { todos, deleteTodo, editTodo } = this.props;
-    return (
-      <ul>
-        {todos.map(item => (
-          <Todo
-            title={item.title}
-            priority={item.priority}
-            state={item.state}
-            deadline={item.deadline}
-            id={item.id}
-            key={item.id}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-          />))}
-      </ul>);
-  }
-}
 
-/* TodosList.propTypes = {
-  todos: arrayOf.isRequired
-}; */
+TodosList.propTypes = {
+  todos: arrayOf(object).isRequired,
+  deleteTodo: func.isRequired,
+  editTodo: func.isRequired,
+  completeTodo: func.isRequired
+};

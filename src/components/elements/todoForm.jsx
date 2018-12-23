@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { func, string, number } from 'prop-types';
+import { func, string } from 'prop-types';
 import Datetime from 'react-datetime';
 
-import { Options } from '../../containers/helpers';
+import { Options, InputMaxLength } from '../../containers/helpers';
 
 export class TodoForm extends Component {
   static propTypes = {
     editTodo: func.isRequired,
-    id: string.isRequired
+    id: string.isRequired,
+    isEdit: func.isRequired
   };
 
   state = {
@@ -24,7 +25,7 @@ export class TodoForm extends Component {
   deadlineHandle = moment => this.setState({ deadline: moment.format('HH:mm DD.MM.YYYY') })
 
   render() {
-    const { editTodo, id } = this.props;
+    const { editTodo, id, isEdit } = this.props;
     const {
       title,
       priority,
@@ -33,15 +34,15 @@ export class TodoForm extends Component {
     } = this.state;
     const yesterday = Datetime.moment().subtract(1, 'hour');
     const valid = current => current.isAfter(yesterday);
-    const maxLength = 50;
     return (
       <form onSubmit={(e) => {
         e.preventDefault();
         if (!title) { return; }
         editTodo(id, title, priority, state, deadline);
+        isEdit();
       }}
       >
-        <input onChange={this.titleHandle} maxLength={maxLength} required />
+        <input onChange={this.titleHandle} maxLength={InputMaxLength} required />
         <select onChange={this.selectHandle} value={priority}>
           {Options.map(item => <option value={item} key={item}>{item}</option>)}
         </select>

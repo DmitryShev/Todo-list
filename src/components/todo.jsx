@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-alert */
 import React, { Component } from 'react';
 import { string, func } from 'prop-types';
 import styled from 'styled-components';
@@ -5,6 +7,7 @@ import styled from 'styled-components';
 import { TodoForm } from './elements/todoForm';
 
 import EditIcon from '../assets/img/edit.svg';
+import RemoveIcon from '../assets/img/remove.svg';
 import Rectangle from '../assets/img/rect.svg';
 
 
@@ -79,7 +82,8 @@ export class Todo extends Component {
     deadline: string.isRequired,
     id: string.isRequired,
     deleteTodo: func.isRequired,
-    editTodo: func.isRequired
+    editTodo: func.isRequired,
+    completeTodo: func.isRequired
   }
 
   state = {
@@ -105,6 +109,7 @@ export class Todo extends Component {
       deadline,
       deleteTodo,
       editTodo,
+      completeTodo,
       id
     } = this.props;
     const { isOpen, isEdit } = this.state;
@@ -114,14 +119,17 @@ export class Todo extends Component {
           <Rect src={Rectangle} isOpen={isOpen} />
           {isOpen ? (
             <React.Fragment>
-              <EditButton type="button" onClick={() => deleteTodo(id)}>
-                <EditButtonImg src={EditIcon} alt="edit" />
+              <EditButton type="button" onClick={() => confirm('Are you sure?') && deleteTodo(id)}>
+                <EditButtonImg src={RemoveIcon} alt="edit" />
               </EditButton>
               <TodoText>{title}</TodoText>
               <TodoPriority>{priority}</TodoPriority>
               <TodoState>{state}</TodoState>
               <TodoDeadline>{deadline}</TodoDeadline>
-              <button type="button" onClick={this.editModeHandle}>change todo</button>
+              <EditButton type="button" onClick={this.editModeHandle}>
+                <EditButtonImg src={EditIcon} alt="edit" />
+              </EditButton>
+              <button onClick={() => completeTodo(id, !state)} type="button">complete</button>
               {isEdit && (
                 <TodoForm
                   id={id}
@@ -130,6 +138,7 @@ export class Todo extends Component {
                   priority={priority}
                   state={state}
                   deadline={deadline}
+                  isEdit={this.editModeHandle}
                 />
               )}
             </React.Fragment>

@@ -15,10 +15,10 @@ export const todos = (state = initialState, action) => {
         }
       ];
     case C.EDIT_TODO:
-      return state.map((item) => {
-        if (item.id === action.id) {
+      return state.map((todo) => {
+        if (todo.id === action.id) {
           return {
-            // ...item,
+            // ...todo,
             id: action.id,
             title: action.title,
             priority: action.priority,
@@ -26,10 +26,20 @@ export const todos = (state = initialState, action) => {
             deadline: action.deadline
           };
         }
-        return item;
+        return todo;
+      });
+    case C.COMPLETE_TODO:
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return {
+            ...todo,
+            state: !action.state
+          };
+        }
+        return todo;
       });
     case C.DELETE_TODO:
-      return state.filter(item => item.id !== action.id);
+      return state.filter(todo => todo.id !== action.id);
     default:
       return state;
   }

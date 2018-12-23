@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Datetime from 'react-datetime';
 
 import { addTodo } from '../redux/actions';
-import { Options, State } from './helpers';
+import { Options, InputMaxLength } from './helpers';
 
 import '../../node_modules/react-datetime/css/react-datetime.css';
 
@@ -17,7 +17,7 @@ export class Input extends Component {
   state = {
     title: '',
     priority: '',
-    state: State.active,
+    state: false,
     deadline: '',
   }
 
@@ -35,10 +35,8 @@ export class Input extends Component {
       deadline
     } = this.state;
     const { dispatch } = this.props;
-    // console.log(this.state);
     const yesterday = Datetime.moment().subtract(1, 'hour');
     const valid = current => current.isAfter(yesterday);
-    const maxLength = 50;
     return (
       <div>
         <form onSubmit={(e) => {
@@ -51,7 +49,7 @@ export class Input extends Component {
             onChange={this.titleHandle}
             value={title}
             type="text"
-            maxLength={maxLength}
+            maxLength={InputMaxLength}
             required
           />
           <select onChange={this.selectHandle} value={priority}>
