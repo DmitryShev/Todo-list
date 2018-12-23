@@ -9,6 +9,16 @@ import CalendarIcon from '../../assets/img/calendar.svg';
 import SaveIcon from '../../assets/img/save.svg';
 import ClearDateIcon from '../../assets/img/clearDate.svg';
 
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  margin: 20px;
+`;
+
 const Button = styled.button`
   color: #fff;
   background-color: #2196f3;
@@ -37,20 +47,34 @@ const ButtonImg = styled.img`
 `;
 
 const StyledSelect = styled.select`
-  min-width: 0;
-  height: 1.1875em;
+  height: 30px;
   border: 0;
   border-radius: 0;
-  margin: 0;
-  
-
+  margin: 8px;
   box-sizing: content-box;
   background: none;
   cursor: pointer;
   min-width: 16px;
   user-select: none;
-  padding-right: 32px;
   outline: 0
+`;
+
+const PriorityBlock = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+`;
+
+const StyledTextInput = styled.input`
+  width: 340px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #000;
+  outline: none;
+  display: block;
+  margin: 2px;
 `;
 
 export class TodoForm extends Component {
@@ -94,41 +118,45 @@ export class TodoForm extends Component {
     const yesterday = Datetime.moment().subtract(1, 'hour');
     const valid = current => current.isAfter(yesterday);
     return (
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        if (!title) { return; }
-        editTodo(id, title, priority, state, deadline);
-        isEdit();
-      }}
-      >
-        <input
-          onChange={this.titleHandle}
-          maxLength={InputMaxLength}
-          defaultValue={this.props.title}
-          required
-        />
-        <StyledSelect onChange={this.selectHandle}>
-          <option disabled selected="selected">Priority</option>
-          {Options.map(item => <option value={item} key={item}>{item}</option>)}
-        </StyledSelect>
-        <Button onClick={this.openCalendarHandle} type="button">
-          <ButtonImg src={CalendarIcon} alt="edit" />
-        </Button>
-        <span>
-          <Datetime
-            onChange={this.deadlineHandle}
-            isValidDate={valid}
-            input={false}
-            open={isOpenCalendar}
+      <Container>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (!title) { return; }
+          editTodo(id, title, priority, state, deadline);
+          isEdit();
+        }}
+        >
+          <StyledTextInput
+            onChange={this.titleHandle}
+            maxLength={InputMaxLength}
+            defaultValue={this.props.title}
+            required
           />
-        </span>
-        <Button onClick={this.onClearDeadline} type="button" alt="clear date">
-          <ButtonImg src={ClearDateIcon} alt="edit" />
-        </Button>
-        <Button type="submit">
-          <ButtonImg src={SaveIcon} alt="edit" />
-        </Button>
-      </form>
+          <PriorityBlock>
+            <StyledSelect onChange={this.selectHandle}>
+              <option disabled selected="selected">Priority</option>
+              {Options.map(item => <option value={item} key={item}>{item}</option>)}
+            </StyledSelect>
+            <Button onClick={this.openCalendarHandle} type="button">
+              <ButtonImg src={CalendarIcon} alt="edit" />
+            </Button>
+          </PriorityBlock>
+          <span>
+            <Datetime
+              onChange={this.deadlineHandle}
+              isValidDate={valid}
+              input={false}
+              open={isOpenCalendar}
+            />
+          </span>
+          <Button onClick={this.onClearDeadline} type="button" alt="clear date">
+            <ButtonImg src={ClearDateIcon} alt="edit" />
+          </Button>
+          <Button type="submit">
+            <ButtonImg src={SaveIcon} alt="edit" />
+          </Button>
+        </form>
+      </Container>
     );
   }
 }

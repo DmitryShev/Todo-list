@@ -8,18 +8,20 @@ import { TodoForm } from './elements/todoForm';
 
 import EditIcon from '../assets/img/edit.svg';
 import RemoveIcon from '../assets/img/remove.svg';
-import Rectangle from '../assets/img/rect.svg';
+// import Rectangle from '../assets/img/rect.svg';
 import DoneIcon from '../assets/img/done.svg';
 
 
 const Wrap = styled.li`
   list-style-type: none;
+  margin: 10px 0;
+  border-top: 0.2px solid #cccccc;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   align-content: center;
@@ -54,29 +56,33 @@ const ButtonImg = styled.img`
 
 const TodoText = styled.p`
   // flex: 0 0 400px;
-  width: 200px;
+  flex: 1;
+  width: 320px;
   margin: 6px;
   text-decoration: ${({ isComplete }) => (isComplete ? 'line-through' : 'none')}
 `;
 
 const TodoPriority = styled.p`
   margin: 6px;
+  width: 60px;
 `;
 
 const TodoState = styled.p`
   margin: 6px;
+  width: 60px;
 `;
 
 const TodoDeadline = styled.p`
   margin: 6px;
+  width: 80px;
 `;
 
-const Rect = styled.img`
+/* const Rect = styled.img`
   width: 16px;
   height: 16px;
   transform: ${({ isOpen }) => (isOpen ? 'rotate(360deg)' : 'rotate(180deg)')};
   transition: transform 0.3s linear;
-`;
+`; */
 
 export class Todo extends Component {
   static propTypes = {
@@ -120,7 +126,7 @@ export class Todo extends Component {
     return (
       <Wrap>
         <Container>
-          <Rect src={Rectangle} isOpen={isOpen} />
+          {/* <Rect src={Rectangle} isOpen={isOpen} /> */}
           {isOpen ? (
             <React.Fragment>
               <Button type="button" onClick={() => confirm('Are you sure?') && deleteTodo(id)}>
@@ -136,22 +142,22 @@ export class Todo extends Component {
               <Button type="button" onClick={() => completeTodo(id)}>
                 <ButtonImg src={DoneIcon} alt="edit" />
               </Button>
-              {isEdit && (
-                <TodoForm
-                  id={id}
-                  editTodo={editTodo}
-                  title={title}
-                  priority={priority}
-                  state={state}
-                  deadline={deadline}
-                  isEdit={this.editModeHandle}
-                />
-              )}
             </React.Fragment>
           ) : (
             <div>Task</div>
           )}
         </Container>
+        {isEdit && (
+          <TodoForm
+            id={id}
+            editTodo={editTodo}
+            title={title}
+            priority={priority}
+            state={state}
+            deadline={deadline}
+            isEdit={this.editModeHandle}
+          />
+        )}
       </Wrap>
     );
   }
