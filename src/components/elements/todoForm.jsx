@@ -14,7 +14,7 @@ export class TodoForm extends Component {
   state = {
     title: '',
     priority: '',
-    state: '',
+    state: false,
     deadline: '',
   }
 
@@ -53,7 +53,7 @@ export class TodoForm extends Component {
             input={false}
           />
         </span>
-        <button type="submit">Update Todo</button>
+        <button type="submit">EditTodo Todo</button>
       </form>
     );
   }

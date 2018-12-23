@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-alert */
 import React, { Component } from 'react';
-import { string, func } from 'prop-types';
+import { string, func, bool } from 'prop-types';
 import styled from 'styled-components';
 
 import { TodoForm } from './elements/todoForm';
@@ -9,6 +9,7 @@ import { TodoForm } from './elements/todoForm';
 import EditIcon from '../assets/img/edit.svg';
 import RemoveIcon from '../assets/img/remove.svg';
 import Rectangle from '../assets/img/rect.svg';
+import DoneIcon from '../assets/img/done.svg';
 
 
 const Wrap = styled.li`
@@ -27,7 +28,7 @@ const Container = styled.div`
 const EditButton = styled.button`
   color: #fff;
   background-color: #2196f3;
-
+  flex: 0 0 32px;
   margin: 8px;
   width: 32px;
   height: 32px;
@@ -52,7 +53,10 @@ const EditButtonImg = styled.img`
 `;
 
 const TodoText = styled.p`
+  // flex: 0 0 400px;
+  width: 200px;
   margin: 6px;
+  text-decoration: ${({ isComplete }) => (isComplete ? 'line-through' : 'none')}
 `;
 
 const TodoPriority = styled.p`
@@ -78,7 +82,7 @@ export class Todo extends Component {
   static propTypes = {
     title: string.isRequired,
     priority: string.isRequired,
-    state: string.isRequired,
+    state: bool.isRequired,
     deadline: string.isRequired,
     id: string.isRequired,
     deleteTodo: func.isRequired,
@@ -122,14 +126,16 @@ export class Todo extends Component {
               <EditButton type="button" onClick={() => confirm('Are you sure?') && deleteTodo(id)}>
                 <EditButtonImg src={RemoveIcon} alt="edit" />
               </EditButton>
-              <TodoText>{title}</TodoText>
+              <TodoText isComplete={state}>{title}</TodoText>
               <TodoPriority>{priority}</TodoPriority>
               <TodoState>{state}</TodoState>
               <TodoDeadline>{deadline}</TodoDeadline>
               <EditButton type="button" onClick={this.editModeHandle}>
                 <EditButtonImg src={EditIcon} alt="edit" />
               </EditButton>
-              <button onClick={() => completeTodo(id, !state)} type="button">complete</button>
+              <EditButton type="button" onClick={() => completeTodo(id)}>
+                <EditButtonImg src={DoneIcon} alt="edit" />
+              </EditButton>
               {isEdit && (
                 <TodoForm
                   id={id}

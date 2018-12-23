@@ -18,7 +18,6 @@ export const todos = (state = initialState, action) => {
       return state.map((todo) => {
         if (todo.id === action.id) {
           return {
-            // ...todo,
             id: action.id,
             title: action.title,
             priority: action.priority,
@@ -33,7 +32,7 @@ export const todos = (state = initialState, action) => {
         if (todo.id === action.id) {
           return {
             ...todo,
-            state: !action.state
+            state: !todo.state
           };
         }
         return todo;
