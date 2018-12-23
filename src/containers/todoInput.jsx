@@ -16,7 +16,7 @@ export class Input extends Component {
 
   state = {
     title: '',
-    priority: '',
+    priority: Options[0],
     state: false,
     deadline: '',
   }
@@ -52,7 +52,8 @@ export class Input extends Component {
             maxLength={InputMaxLength}
             required
           />
-          <select onChange={this.selectHandle} value={priority}>
+          <select onChange={this.selectHandle}>
+            <option disabled selected="selected">Priority</option>
             {Options.map(item => <option value={item} key={item}>{item}</option>)}
           </select>
           <span>

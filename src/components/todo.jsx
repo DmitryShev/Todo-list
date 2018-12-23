@@ -25,7 +25,7 @@ const Container = styled.div`
   align-content: center;
 `;
 
-const EditButton = styled.button`
+const Button = styled.button`
   color: #fff;
   background-color: #2196f3;
   flex: 0 0 32px;
@@ -47,7 +47,7 @@ const EditButton = styled.button`
   }
 `;
 
-const EditButtonImg = styled.img`
+const ButtonImg = styled.img`
   width: 100%;
   height: 100%;
 `;
@@ -123,19 +123,19 @@ export class Todo extends Component {
           <Rect src={Rectangle} isOpen={isOpen} />
           {isOpen ? (
             <React.Fragment>
-              <EditButton type="button" onClick={() => confirm('Are you sure?') && deleteTodo(id)}>
-                <EditButtonImg src={RemoveIcon} alt="edit" />
-              </EditButton>
+              <Button type="button" onClick={() => confirm('Are you sure?') && deleteTodo(id)}>
+                <ButtonImg src={RemoveIcon} alt="edit" />
+              </Button>
               <TodoText isComplete={state}>{title}</TodoText>
               <TodoPriority>{priority}</TodoPriority>
               <TodoState>{state}</TodoState>
               <TodoDeadline>{deadline}</TodoDeadline>
-              <EditButton type="button" onClick={this.editModeHandle}>
-                <EditButtonImg src={EditIcon} alt="edit" />
-              </EditButton>
-              <EditButton type="button" onClick={() => completeTodo(id)}>
-                <EditButtonImg src={DoneIcon} alt="edit" />
-              </EditButton>
+              <Button type="button" onClick={this.editModeHandle}>
+                <ButtonImg src={EditIcon} alt="edit" />
+              </Button>
+              <Button type="button" onClick={() => completeTodo(id)}>
+                <ButtonImg src={DoneIcon} alt="edit" />
+              </Button>
               {isEdit && (
                 <TodoForm
                   id={id}
